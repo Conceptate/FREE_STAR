@@ -17,6 +17,7 @@ const MAX_JUMP_COUNT = 2
 
 var jump_count = 0
  
+
  
 func _ready():
     set_process(true)
@@ -41,7 +42,7 @@ func _process(delta):
         input_direction = 0
    
     if input_direction == - direction:
-        speed.x /= 3
+        speed.x /= 100
     if input_direction:
         speed.x += ACCELERATION * delta
     else:
