@@ -17,11 +17,12 @@ const MAX_JUMP_COUNT = 2
 
 var jump_count = 0
  
-
+var sprite_node
  
 func _ready():
     set_process(true)
     set_process_input(true)
+    sprite_node = get_node("Sprite")
  
  
 func _input(event):
@@ -35,9 +36,11 @@ func _process(delta):
         direction = input_direction
    
     if Input.is_action_pressed("move_left"):
-        input_direction = -1
+        input_direction = -1 
+        sprite_node.set_flip_h(true)
     elif Input.is_action_pressed("move_right"):
         input_direction = 1
+        sprite_node.set_flip_h(false)
     else:
         input_direction = 0
    

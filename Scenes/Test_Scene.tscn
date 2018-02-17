@@ -57,6 +57,12 @@ collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+
+transform/scale = Vector2( 0.999998, 1 )
+texture = ExtResource( 3 )
+flip_h = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 
 transform/pos = Vector2( -0.223901, 0.166588 )
@@ -64,11 +70,5 @@ transform/scale = Vector2( 2.45183, 2.46009 )
 shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
-
-[node name="Sprite" type="Sprite" parent="KinematicBody2D/CollisionShape2D"]
-
-transform/pos = Vector2( 0.0913198, -0.0677162 )
-transform/scale = Vector2( 0.407858, 0.406489 )
-texture = ExtResource( 3 )
 
 
