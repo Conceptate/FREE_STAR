@@ -5,10 +5,11 @@ var input_direction = 0
 var speed = Vector2()
 var velocity = Vector2()
 
-var walk_speed = 150
-var run_speed = 325
 var walking = false
 var movement_state = false
+
+const WALK_SPEED = 150
+const RUN_SPEED = 325
 
 const JUMP_FORCE = 700
 const GRAVITY = 2000
@@ -26,8 +27,14 @@ func _ready():
  
  
 func _input(event):
+	print(event)
+	print(jump_count)
+	print("call 1")
 	if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
+		# BUG: event.is_action_pressed("jump") doesnt work when shift is held
+		print("call 2 :)")
 		speed.y = -JUMP_FORCE
+		print(speed.y)
 		jump_count += 1
  
 # on every frame...
@@ -54,35 +61,34 @@ func _process(delta):
 	if (input_direction):
 		if (walking):
 			if (input_direction == -1):
-				speed.x = walk_speed
+				speed.x = WALK_SPEED
 				movement_state = true
 				print("walking left")
 			elif (input_direction == 1):
-				speed.x = walk_speed
+				speed.x = WALK_SPEED
 				movement_state = true
 				print("walking right")
 		else:
 			if (input_direction == -1):
-				speed.x = run_speed
+				speed.x = RUN_SPEED
 				movement_state = false
 				print("running left")
 			elif (input_direction == 1):
-				speed.x = run_speed
+				speed.x = RUN_SPEED
 				movement_state = false
 				print("running right")
 	else:
 		speed.x = 0
 		movement_state = false
 	if (movement_state):
-		speed.x = clamp(speed.x, 0, walk_speed)
-		print("walking clamp")
+		speed.x = clamp(speed.x, 0, WALK_SPEED)
+#		print("walking clamp")
 	else:
-		speed.x = clamp(speed.x, 0, run_speed)
-		print("running clamp")
+		speed.x = clamp(speed.x, 0, RUN_SPEED)
+#		print("running clamp")
 	
 	speed.y += GRAVITY * delta
 	
-	print(jump_count)
 	velocity = Vector2(speed.x * delta * input_direction, speed.y * delta)
 	var movement_remainder = move(velocity)
 	
