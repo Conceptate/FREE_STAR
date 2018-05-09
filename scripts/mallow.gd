@@ -24,19 +24,16 @@ func _ready():
 	set_process(true)
 	set_process_input(true)
 	sprite_node = get_node("Sprite")
- 
- 
+
+# Jumping
 func _input(event):
-	print(event)
-	print(jump_count)
-	print("call 1")
-	if jump_count < MAX_JUMP_COUNT and event.is_action_pressed("jump"):
-		# BUG: event.is_action_pressed("jump") doesnt work when shift is held
-		print("call 2 :)")
+	# BUG: is_action_pressed() doesnt work when you're walking
+	if (event.is_action_pressed("jump") and jump_count < MAX_JUMP_COUNT):
+		print("yeet")
 		speed.y = -JUMP_FORCE
-		print(speed.y)
 		jump_count += 1
- 
+	pass
+
 # on every frame...
 func _process(delta):
 	# Reset the walk variable
@@ -46,6 +43,7 @@ func _process(delta):
 #	if Input.is_action_pressed(KEY_SHIFT):
 	if Input.is_action_pressed("walk"):
 		walking = true
+		print("Call 3")
 #		print("i work fine")
 	
 	# If walking left or right, set those variables
